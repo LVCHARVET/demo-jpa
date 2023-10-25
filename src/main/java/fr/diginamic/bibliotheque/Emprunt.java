@@ -1,6 +1,6 @@
 package fr.diginamic.bibliotheque;
 
-import java.security.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "EMPRUNT")
@@ -18,14 +20,16 @@ public class Emprunt {
 	@Id
 	int id;
 
+	@Temporal(TemporalType.DATE)
 	@Column(name = "DATE_DEBUT", nullable = false)
-	Timestamp dateDebut;
+	Date dateDebut;
 
 	@Column(name = "DELAI", length = 10)
 	int delai;
 
+	@Temporal(TemporalType.DATE)
 	@Column(name = "DATE_FIN")
-	Timestamp dateFin;
+	Date dateFin;
 
 	@ManyToOne
 	@JoinColumn(name = "ID_CLIENT")
@@ -51,12 +55,20 @@ public class Emprunt {
 		this.id = id;
 	}
 
-	public Timestamp getDateDebut() {
+	public Date getDateDebut() {
 		return dateDebut;
 	}
 
-	public void setDateDebut(Timestamp dateDebut) {
+	public void setDateDebut(Date dateDebut) {
 		this.dateDebut = dateDebut;
+	}
+
+	public Date getDateFin() {
+		return dateFin;
+	}
+
+	public void setDateFin(Date dateFin) {
+		this.dateFin = dateFin;
 	}
 
 	public int getDelai() {
@@ -65,14 +77,6 @@ public class Emprunt {
 
 	public void setDelai(int delai) {
 		this.delai = delai;
-	}
-
-	public Timestamp getDateFin() {
-		return dateFin;
-	}
-
-	public void setDateFin(Timestamp dateFin) {
-		this.dateFin = dateFin;
 	}
 
 	public Client getClients() {
